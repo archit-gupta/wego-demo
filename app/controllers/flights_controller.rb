@@ -1,5 +1,6 @@
 class FlightsController < ApplicationController
   include Apiint
+  autocomplete :airport, :name, :full => true, :extra_data => [:code], :display_value => :show_code
   before_action :set_flight, only: [:show, :edit, :update, :destroy]
 
   # GET /flights
@@ -21,6 +22,7 @@ class FlightsController < ApplicationController
   def new
     #byebug
     #@flight = Flight.new
+    #@airport = Airport.all.map(&:name) 
   end
   private
     # Use callbacks to share common setup or constraints between actions.

@@ -3,8 +3,8 @@ Rails.application.routes.draw do
     collection do
       post 'search'
     end
+    get :autocomplete_airport_name, :on => :collection
   end
-
   #get 'flight/index'
 
   # The priority is based upon order of creation: first created -> highest priority.

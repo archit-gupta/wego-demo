@@ -1,7 +1,15 @@
+<script>
+  jQuery(document).ready(function($) {
+    $('#trips_departure_code, #trips_arrival_code').bind('railsAutocomplete.select', function(event, data){
+      $(this).val(data.item.code);
+    });
+  }); 
+</script>
+
 <%= simple_form_for "trips",:url => search_flights_path, :html => { :class => 'form-horizontal' } do |f| %>
-  <%= f.input :departure_code, label: '',  input_html: {value: "From"} %>
-  <%= f.input :arrival_code,  label: '',  input_html: {value: "To"} %>
-  <%= f.input :date,label: '',  :input_html => {value: "Select Date"} %> 
+  <%= f.input :departure_code, :as => :autocomplete,:url => autocomplete_airport_name_flights_path %>
+  <%= f.input :arrival_code,    input_html: {value: "To"} %>
+  <%= f.input :date,  :input_html => {value: "Select Date"} %> 
   <%= f.input :adult, :collection => [['1',1],['2',2],['3',3],['4',4],['5',5],['6',6]], include_blank: false %>
   <%= f.input :children, :collection => [['0',0],['1',1],['2',2],['3',3],['4',4],['5',5],['6',6]], include_blank: false %>
   <%= f.input :cabin, :collection => [['economy','economy'],['business','business'],['first','first']], include_blank: false %>
