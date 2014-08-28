@@ -3312,7 +3312,7 @@ h2, h3 {
     width: 45.8333%;
 }
 .medium-12 {
-    width: 50%;
+    width: 37%;
 }
 .medium-13 {
     width: 54.1667%;
@@ -5772,7 +5772,7 @@ input.ui-button::-moz-focus-inner, button.ui-button::-moz-focus-inner {
 }
 }
 .columns.columns-no-padding, .content.content-no-padding {
-    padding: 70px;
+    padding: 0px;
 }
 .content {
     display: block;

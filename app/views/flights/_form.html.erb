@@ -2,10 +2,8 @@
   <%= f.input :departure_code, label: '',  input_html: {value: "From"} %>
   <%= f.input :arrival_code,  label: '',  input_html: {value: "To"} %>
   <%= f.input :date,label: '',  :input_html => {value: "Select Date"} %> 
-  <%= f.input :adult, :collection => [['1',1],['2',2],['3',3],['4',4],['5',5],['6',6]] %>
-  <%= f.input :children, :collection => [['0',0],['1',1],['2',2],['3',3],['4',4],['5',5],['6',6]] %>
-  <%= f.input :cabin, :collection => [['economy','economy'],['business','business'],['first','first']]%>
+  <%= f.input :adult, :collection => [['1',1],['2',2],['3',3],['4',4],['5',5],['6',6]], include_blank: false %>
+  <%= f.input :children, :collection => [['0',0],['1',1],['2',2],['3',3],['4',4],['5',5],['6',6]], include_blank: false %>
+  <%= f.input :cabin, :collection => [['economy','economy'],['business','business'],['first','first']], include_blank: false %>
   <%= f.button :submit, :class => 'btn-primary' ,:value=> "Search" %>
-  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                flights_path, :class => 'btn btn-default' %>
 <% end %>

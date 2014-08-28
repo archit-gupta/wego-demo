@@ -1,23 +1,53 @@
 <%- model_class = Flight -%>
+ <script>
+$(function() {
+$( document ).tooltip();
+});
+</script>
 <div class="page-header">
   <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
 </div>
-<table class="table table-striped">
+
+<%#= @list %>
+
+<table class="table table-striped" >
   <thead>
     <tr>
-      <th><%= model_class.human_attribute_name(:id) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
-      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+      <th>Price</th>    
+      <th>Site Name</th>  
+      <th>Flight Name</th>  
+      <th>Departure Time</th>  
+      <th>Arrival Time</th> 
+      <th>DeepLink</th> 
     </tr>
   </thead>
-  <tbody>
-    <% byebug %>
-    <%= @list.inspect %>
-      
-   
-  </tbody>
-</table>
 
+  <% @list["routes"].each do |list|%>
+  <% departure_time = DateTime.parse(list["outbound_segments"][0]["departure_time"]) %>
+  <% arrival_time = DateTime.parse(list["outbound_segments"][-1]["arrival_time"]) %>
+  <tbody>
+    <tr>  
+      <td><%= number_to_currency(list["fares"][0]["price"].to_f) %></td> 
+      <td><%= list["fares"][0]["provider_code"] %></td>  
+      <td title='
+        <% list["outbound_segments"].each_with_index do |dest,index|%>
+          <% if index == 0 %>
+            <%= dest["departure_name"] %>
+          <% else %>
+            <%= dest["arrival_name"] %>
+          <% end %>
+            <%= "-->" unless index == list["outbound_segments"].length - 1 %>
+        <% end %>'>
+        <%= list["outbound_segments"][0]["airline_name"] %>
+      </td>  
+      <td><%= departure_time.strftime("%Y-%m-%d %I:%M%p") %></td>  
+      <td><%= arrival_time.strftime("%Y-%m-%d %I:%M%p") %></td>
+      <td><%= link_to 'View', list["fares"][0]["deeplink"],  target: "_blank"  %></td>
+    </tr>
+  </tbody>
+  
+  <% end %>
+</table>
 <%= link_to t('.new', :default => t("helpers.links.new")),
             new_flight_path,
             :class => 'btn btn-primary' %>
