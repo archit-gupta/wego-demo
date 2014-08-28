@@ -17,3 +17,4 @@
 
 /config/database.yml
 /log/development.log
+/db/schema.rb
