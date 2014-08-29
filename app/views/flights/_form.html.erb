@@ -1,7 +1,12 @@
-<%= simple_form_for "trips",:url => search_flights_path, :html => { :class => 'form-horizontal' } do |f| %>
-  <%= f.input :departure_code, label: '',  input_html: {value: "From"} %>
-  <%= f.input :arrival_code,  label: '',  input_html: {value: "To"} %>
-  <%= f.input :date,label: '',  :input_html => {value: "Select Date"} %> 
+<style>
+  .label_class {float: left;width:150px;text-align: left !important;}
+  .input_class {width:300px !important;}
+</style>
+
+<%= simple_form_for "trips",:url => search_flights_path, defaults: {label_html: { class: 'label_class'} }, :html => { :class => 'form-horizontal' } do |f| %>
+  <%= f.input :departure_code, :as => :autocomplete,:url => autocomplete_airport_name_flights_path, input_html: { class: 'input_class' } %>
+  <%= f.input :arrival_code,:as => :autocomplete,:url => autocomplete_airport_name_flights_path, input_html: { class: 'input_class' } %>
+  <%= f.input :date,  :input_html => {value: "Select Date", class: 'input_class' } %> 
   <%= f.input :adult, :collection => [['1',1],['2',2],['3',3],['4',4],['5',5],['6',6]], include_blank: false %>
   <%= f.input :children, :collection => [['0',0],['1',1],['2',2],['3',3],['4',4],['5',5],['6',6]], include_blank: false %>
   <%= f.input :cabin, :collection => [['economy','economy'],['business','business'],['first','first']], include_blank: false %>

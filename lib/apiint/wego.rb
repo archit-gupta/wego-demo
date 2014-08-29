@@ -8,7 +8,13 @@ module Apiint
       url = URI.parse("http://api.wego.com/flights/api/k/2/searches?api_key=e16ecfbf7f96a9f56345&ts_code=1d9aa")
       http = Net::HTTP.new(url.host, url.port)
       res = http.post(url, data.to_json, headers)
+
       response = JSON.parse(res.body)
+      if response["message"]
+        return res.body
+      end
+
+      sleep 1
       id = rand(1376967853520..9976967853520)
       data = { id: id , search_id: response["id"], trip_id: response["trips"][0]["id"], fares_query_type: "route"}
       url = URI.parse("http://api.wego.com/flights/api/k/2/fares?api_key=e16ecfbf7f96a9f56345&ts_code=1d9aa")

@@ -4,6 +4,25 @@
   <title>Wego</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag("search_from.css") %>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css">
+  <%= stylesheet_link_tag("select_date.css") %>
+  <script>
+    $(function() {
+      $( "#trips_date" ).datepicker({
+          dateFormat: 'yy-mm-dd'  
+        });
+    });
+  </script>
+  <script>
+    jQuery(document).ready(function($) {
+      $('#trips_departure_code, #trips_arrival_code').bind('railsAutocomplete.select', function(event, data){
+        $(this).val(data.item.code);
+      });
+    }); 
+  </script>
+
+
   <%= csrf_meta_tags %>
 </head>
 <body>

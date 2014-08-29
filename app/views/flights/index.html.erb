@@ -7,14 +7,18 @@ $( document ).tooltip();
 <div class="page-header">
   <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
 </div>
-
 <%#= @list %>
-
+<% if  @list["routes_count"] == 0 %>
+  No data available<br/>
+<% elsif @list["message"] %>
+  <%= @list["message"] %><br/>
+<% else %>
 <table class="table table-striped" >
   <thead>
     <tr>
       <th>Price</th>    
-      <th>Site Name</th>  
+      <th>Site Name</th> 
+      <th>Stops</th>  
       <th>Flight Name</th>  
       <th>Departure Time</th>  
       <th>Arrival Time</th> 
@@ -28,7 +32,8 @@ $( document ).tooltip();
   <tbody>
     <tr>  
       <td><%= number_to_currency(list["fares"][0]["price"].to_f) %></td> 
-      <td><%= list["fares"][0]["provider_code"] %></td>  
+      <td><%= list["fares"][0]["provider_code"] %></td> 
+      <td><%= list["outbound_segments"].length-2 %></td> 
       <td title='
         <% list["outbound_segments"].each_with_index do |dest,index|%>
           <% if index == 0 %>
@@ -45,7 +50,7 @@ $( document ).tooltip();
       <td><%= link_to 'View', list["fares"][0]["deeplink"],  target: "_blank"  %></td>
     </tr>
   </tbody>
-  
+ <% end %> 
   <% end %>
 </table>
 <%= link_to t('.new', :default => t("helpers.links.new")),
