@@ -1,5 +1,5 @@
 class Airport < ActiveRecord::Base
   def show_code
-    "#{self.name} - <b>#{self.code}</b>"
+    "#{self.name} - #{self.code}"
   end
 end

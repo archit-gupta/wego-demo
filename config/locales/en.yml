@@ -21,3 +21,7 @@
 
 en:
   hello: "Hello world"
+  welcome: <b>welcome!</b>
+  hello_html: <b>hello!</b>
+  title:
+    html: <b>title!</b>

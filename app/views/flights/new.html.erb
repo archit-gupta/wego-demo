@@ -1,21 +1,8 @@
 <%- model_class = Flight -%>
-<%= stylesheet_link_tag("search_from.css") %>
- <link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css">
-
-<%= stylesheet_link_tag("select_date.css") %>
-<script>
-  $(function() {
-    $( "#trips_date" ).datepicker({
-        dateFormat: 'yy-mm-dd'  
-      });
-  });
-</script>
-<div class="page-header">
-  <h1><%=t '.title', :default => [#:'helpers.titles.new',
-   'Search %{model}'], :model => model_class.model_name.human.titleize %></h1>
+<div class="page-header" style="margin-bottom:10px;">
+  <h2><%=t '.title', :default => [#:'helpers.titles.new',
+   'Search %{model}'], :model => model_class.model_name.human.titleize %></h2>
 </div>
-<div class="columns small-24 medium-12 columns-no-padding">
-<div class="search-form search-form-flights js-search-form-flights small-24 medium-18 columns homepage-form js-search-form ">
-<%= render :partial => 'form' %>
-</div>
+<div class="search-form" style="margin:auto; width:450px;">
+  <%= render :partial => 'form' %>
 </div>
